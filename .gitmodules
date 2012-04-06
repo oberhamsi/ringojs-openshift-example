@@ -1,0 +1,3 @@
+[submodule "ringojs"]
+	path = ringojs
+	url = git://github.com/ringo/ringojs.git

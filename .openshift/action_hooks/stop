@@ -1,0 +1,30 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$SCRIPT_DIR/constants"
+
+echo -n "Shutting down: "
+if [ ! -f $RINGO_PID ]; then
+   echo "RingoJs not running"
+   exit 0
+fi
+
+PID=`cat $RINGO_PID 2>/dev/null`
+echo -n "RingoJs (pid $PID) "
+CNT=0
+kill $PID 2>/dev/null;
+# wait for max. 20 seconds to finish
+while [[ -e /proc/$PID && $CNT -lt 20 ]]; do
+   echo -n "."
+   let CNT=CNT+1
+   sleep 1
+done
+
+# kill the process if it's still running
+if [ -e /proc/$PID ]; then
+   echo " killing!"
+   kill -9 $PID 2>/dev/null
+else
+   echo " stopped successfully"
+fi
+rm -f $RINGO_PID

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+RINGO_RUN="${OPENSHIFT_REPO_DIR}ringojs/bin/ringo"
+RINGO_ARGS="${OPENSHIFT_REPO_DIR}yourapp/main.js -H ${OPENSHIFT_INTERNAL_IP} -p ${OPENSHIFT_INTERNAL_PORT}"
+
+RINGO_PID="${OPENSHIFT_DATA_DIR}ringo.pid"
+RINGO_LOG="${OPENSHIFT_LOG_DIR}ringo.log"
+
+ANT_RUN="${OPENSHIFT_REPO_DIR}apache-ant/bin/ant"

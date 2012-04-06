@@ -1,0 +1,18 @@
+#!/bin/bash
+# The logic to start up your application should be put in this
+# script. The application will work only if it binds to
+# $OPENSHIFT_INTERNAL_IP:8080
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$SCRIPT_DIR/constants"
+
+echo -n "Starting: "
+
+if [ -f $RINGO_PID ]; then
+   echo "RingoJs (pid `cat $RINGO_PID`) already running"
+   exit 0
+fi
+
+nohup $RINGO_RUN $RINGO_ARGS > $RINGO_LOG 2>&1 &
+echo $! > $RINGO_PID
+echo "RingoJs (pid `cat $RINGO_PID`) started."
