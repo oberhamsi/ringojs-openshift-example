@@ -22,3 +22,15 @@ Then push the repo upstream
 That's it, you can now checkout your application at:
 
     http://foobar-$YOURNAMESPACE.rhcloud.com/
+
+Modifying this skeleton to run your application
+-------------------------------------------------
+
+Add a toplevel directory holding your Ringo application. Then modify `RINGO_APP_MAIN` in `.openshift/action_hooks/constants` to point to your application's `main.js`.
+
+Finally, add all packages your app requires as submodules below `ringojs-packages`
+
+For example, to add the stick package you would run:
+
+    git submodule add https://github.com/hns/stick.git packages/stick
+    git commit -m 'adding stick package'
